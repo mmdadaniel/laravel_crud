@@ -21,6 +21,9 @@ Route::group(['middleware' => 'web'], function(){
 	Route::get('/home', 'HomeController@index')->name('home');
 });
 
-Route::get('/users', 'UsersController@index');
-Route::get('/users/new', 'UsersController@new');
-Route::post('/users/add', 'UsersController@add');
+Route::get('/users', 'UsersController@index')->middleware('auth');
+Route::get('/users/new', 'UsersController@new')->middleware('auth');
+Route::post('/users/add', 'UsersController@add')->middleware('auth');
+Route::get('/users/{id}/edit', 'UsersController@edit')->middleware('auth');
+Route::post('/users/update/{id}', 'UsersController@update')->middleware('auth');
+Route::delete('/users/delete/{id}', 'UsersController@delete')->middleware('auth');
